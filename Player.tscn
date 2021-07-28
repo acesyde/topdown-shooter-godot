@@ -22,4 +22,7 @@ position = Vector2( -8, 0 )
 shape = SubResource( 1 )
 
 [node name="EndOfGun" type="Position2D" parent="."]
-position = Vector2( 29.7638, 8.92913 )
+position = Vector2( 31, 8.929 )
+
+[node name="GunDirection" type="Position2D" parent="."]
+position = Vector2( 34, 8.929 )

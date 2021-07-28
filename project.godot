@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://Bullet.gd"
+}, {
+"base": "Node2D",
+"class": "BulletManager",
+"language": "GDScript",
+"path": "res://BulletManager.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Player.gd"
 } ]
 _global_script_class_icons={
-"Bullet": ""
+"Bullet": "",
+"BulletManager": "",
+"Player": ""
 }
 
 [application]
