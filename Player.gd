@@ -8,6 +8,8 @@ export (PackedScene) var Bullet
 
 onready var end_of_gun : Position2D = $EndOfGun
 onready var gun_direction : Position2D = $GunDirection
+onready var attack_cooldown : Timer = $AttackCooldown
+onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 func _physics_process(delta: float) -> void:
 	var movement_direction := Vector2.ZERO
@@ -32,8 +34,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		shoot()
 
 func shoot():
-	var bullet_instance: Bullet = Bullet.instance()
+	if attack_cooldown.is_stopped():
+		var bullet_instance: Bullet = Bullet.instance()		
+		var direction = gun_direction.global_position - end_of_gun.global_position
+		emit_signal("player_fired_bullet", bullet_instance, end_of_gun.global_position, direction.normalized())
+		attack_cooldown.start()
+		animation_player.play("muzzle_flash")
 	
-	var direction = gun_direction.global_position - end_of_gun.global_position
-	
-	emit_signal("player_fired_bullet", bullet_instance, end_of_gun.global_position, direction.normalized())
