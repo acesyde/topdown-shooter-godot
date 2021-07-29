@@ -4,14 +4,11 @@ extends KinematicBody2D
 signal player_fired_bullet(bullet, position, direction)
 
 export (int) var speed = 100
-export (PackedScene) var Bullet
+onready var weapon : Weapon = $Weapon
+onready var health_stat : Health = $Health
 
-var health: int = 100
-
-onready var end_of_gun : Position2D = $EndOfGun
-onready var gun_direction : Position2D = $GunDirection
-onready var attack_cooldown : Timer = $AttackCooldown
-onready var animation_player : AnimationPlayer = $AnimationPlayer
+func _ready() -> void:
+	weapon.connect("weapon_fired", self, "shoot")
 
 func _physics_process(delta: float) -> void:
 	var movement_direction := Vector2.ZERO
@@ -33,16 +30,11 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("shoot"):
-		shoot()
+		weapon.shoot()
 
-func shoot():
-	if attack_cooldown.is_stopped():
-		var bullet_instance: Bullet = Bullet.instance()		
-		var direction = gun_direction.global_position - end_of_gun.global_position
-		emit_signal("player_fired_bullet", bullet_instance, end_of_gun.global_position, direction.normalized())
-		attack_cooldown.start()
-		animation_player.play("muzzle_flash")
+func shoot(bullet: Bullet, location: Vector2, direction: Vector2):
+	emit_signal("player_fired_bullet", bullet, location, direction)
 	
 func handle_hit() -> void:
-	health -= 20
-	print("player hit ! ", health)
+	health_stat.health -= 20
+	print("player hit ! ", health_stat.health)
