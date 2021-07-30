@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "AI",
+"language": "GDScript",
+"path": "res://actors/AI.gd"
+}, {
 "base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://weapons/Weapon.gd"
 } ]
 _global_script_class_icons={
+"AI": "",
 "Bullet": "",
 "BulletManager": "",
 "Enemy": "",
@@ -53,6 +59,10 @@ _global_script_class_icons={
 config/name="topdown-game"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalSignals="*res://globals/GlobalSignals.gd"
 
 [display]
 
