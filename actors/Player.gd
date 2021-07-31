@@ -2,8 +2,13 @@ class_name Player
 extends KinematicBody2D
 
 export (int) var speed = 100
+
 onready var weapon : Weapon = $Weapon
 onready var health_stat : Health = $Health
+onready var team: Team  = $Team
+
+func _ready() -> void:
+	weapon.initialize(team.team)
 
 func _physics_process(delta: float) -> void:
 	var movement_direction := Vector2.ZERO
@@ -26,6 +31,9 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("shoot"):
 		weapon.shoot()
+	
+func get_team() -> int:
+	return team.team
 	
 func handle_hit() -> void:
 	health_stat.health -= 20

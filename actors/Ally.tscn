@@ -13,13 +13,13 @@ extents = Vector2( 24, 24 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 128.0
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Ally" type="KinematicBody2D"]
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 352, 176, 37, 43 )
+region_rect = Rect2( 350, 0, 37, 43 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -8, 0 )
@@ -43,7 +43,6 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Team" parent="." instance=ExtResource( 6 )]
-team = 1
 
 [connection signal="body_entered" from="AI/DetectionZone" to="AI" method="_on_DetectionZone_body_entered"]
 [connection signal="body_exited" from="AI/DetectionZone" to="AI" method="_on_DetectionZone_body_exited"]
